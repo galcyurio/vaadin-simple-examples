@@ -1,0 +1,57 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.9.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'com.github.galcyurio'
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+ext {
+	vaadin = '8.1.0'
+    vaadin4Spring = '2.0.0.RELEASE'
+}
+
+dependencies {
+	compileOnly('org.projectlombok:lombok')
+
+    // Vaadin
+	compile('com.vaadin:vaadin-spring-boot-starter')
+    compile "org.vaadin.spring.addons:vaadin-spring-addon-eventbus:${vaadin4Spring}"
+//    compile "org.vaadin.spring.addons:vaadin-spring-addon-mvp:${vaadin4Spring}"
+
+    // Web
+	compile('org.springframework.boot:spring-boot-starter-web')
+	runtime('org.springframework.boot:spring-boot-devtools')
+
+	// Data
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	runtime('com.h2database:h2')
+
+    // Test
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "com.vaadin:vaadin-bom:${vaadin}"
+	}
+}

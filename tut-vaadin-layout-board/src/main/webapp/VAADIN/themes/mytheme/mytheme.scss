@@ -1,0 +1,14 @@
+@import "variables";
+//noinspection CssUnknownTarget
+@import "../valo/valo";
+
+@mixin mytheme {
+  @include valo;
+
+  .list-screen {
+    .v-button-violet {
+      background: violet;
+    }
+  }
+
+}
