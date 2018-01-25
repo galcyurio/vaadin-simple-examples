@@ -1,6 +1,7 @@
 package com.github.galcyurio.ui
 
 import com.jarektoro.responsivelayout.ResponsiveLayout
+import com.vaadin.annotations.Viewport
 import com.vaadin.server.VaadinRequest
 import com.vaadin.spring.annotation.SpringUI
 import com.vaadin.ui.Button
@@ -9,6 +10,7 @@ import com.vaadin.ui.UI
 /**
  * @author galcyurio
  */
+@Viewport("width=device-width, initial-scale=1")
 @SpringUI
 class MainUI : UI() {
     override fun init(request: VaadinRequest?) {
