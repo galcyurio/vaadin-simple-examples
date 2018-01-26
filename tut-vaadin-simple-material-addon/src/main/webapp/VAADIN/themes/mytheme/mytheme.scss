@@ -1,0 +1,9 @@
+$mat-background-color: #fafafa; // #fafafa for a light and #303030 for a dark theme
+$v-focus-color: #00BCD4;
+
+//noinspection CssUnknownTarget
+@import "../material/material";
+
+@mixin mytheme {
+  @include material;
+}
