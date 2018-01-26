@@ -1,6 +1,6 @@
 package com.github.galcyurio.support
 
-import com.vaadin.ui.AbstractComponent
+import com.vaadin.ui.Component
 
-fun <T : AbstractComponent> T.withStyleName(style: String): T =
+fun <T : Component> T.withStyleName(style: String): T =
     apply { addStyleName(style) }
