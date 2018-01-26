@@ -10,6 +10,8 @@ import java.util.List;
 @JavaScript({"mylibrary.js", "mycomponent-connector.js"})
 public class MyComponent extends AbstractJavaScriptComponent {
 
+    List<ValueChangeListener> listeners = new ArrayList<>();
+
     public MyComponent() {
         addFunction("onClick", arguments -> {
             getState().value = arguments.getString(0);
@@ -17,13 +19,13 @@ public class MyComponent extends AbstractJavaScriptComponent {
                 listener.valueChange();
             }
         });
+
+        setValue("");
     }
 
     public interface ValueChangeListener extends Serializable {
         void valueChange();
     }
-
-    List<ValueChangeListener> listeners = new ArrayList<>();
 
     public void addValueChangeListener(ValueChangeListener listener) {
         listeners.add(listener);

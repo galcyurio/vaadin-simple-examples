@@ -14,8 +14,10 @@ public class MainUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-        setContent(new VerticalLayout(){{
-            addComponents(new MyComponent());
+        setContent(new VerticalLayout() {{
+            addComponents(new MyComponent() {{
+                setValue("Hello, MyComponent!");
+            }});
         }});
     }
 }
