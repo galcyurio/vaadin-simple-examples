@@ -8,7 +8,6 @@
     <artifactId>tut-vaadin-simple-app-layout-addon</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -128,6 +127,7 @@
                 <version>${vaadin.version}</version>
                 <executions>
                     <execution>
+                        <phase>compile</phase>
                         <goals>
                             <goal>clean</goal>
                             <goal>resources</goal>
