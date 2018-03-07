@@ -1,13 +1,16 @@
 package com.github.galcyurio.ui
 
 import com.vaadin.server.VaadinRequest
+import com.vaadin.shared.ui.dnd.DropEffect
 import com.vaadin.shared.ui.dnd.EffectAllowed
 import com.vaadin.spring.annotation.SpringUI
 import com.vaadin.ui.Label
 import com.vaadin.ui.UI
+import com.vaadin.ui.VerticalLayout
 import com.vaadin.ui.dnd.DragSourceExtension
+import com.vaadin.ui.dnd.DropTargetExtension
+import com.vaadin.ui.themes.ValoTheme
 import org.vaadin.viritin.layouts.MVerticalLayout
-
 
 /**
  * @author galcyurio
@@ -16,22 +19,30 @@ import org.vaadin.viritin.layouts.MVerticalLayout
 class MainUI : UI() {
     override fun init(p0: VaadinRequest?) {
         content = MVerticalLayout().apply {
-            val draggableLabel = Label("You can grab and drag me")
+            val label = Label("You can grab and drag me")
 
-            val dragSource = DragSourceExtension(draggableLabel).apply {
+            val dropTargetLayout = VerticalLayout().apply {
+                caption = "Drop things inside me"
+                addStyleName(ValoTheme.LAYOUT_CARD)
+            }
+            add(label, dropTargetLayout)
+
+            DragSourceExtension<Label>(label).apply {
                 effectAllowed = EffectAllowed.MOVE
-                dataTransferText = "hello receiver"
+            }
 
-                setDataTransferData("text/html", "<label>hello receiver</label>")
-                addDragStartListener { println("START") }
-                addDragEndListener {
-                    when (it.isCanceled) {
-                        true -> println("CANCEL")
-                        false -> println("FINISH")
-                    }
+            DropTargetExtension(dropTargetLayout).apply {
+                // the drop effect must match the allowed effect in the drag source for a successful drop
+                dropEffect = DropEffect.MOVE
+
+                // catch the drops
+                addDropListener { event ->
+                    val dragSource = event.dragSourceComponent
+                    dropTargetLayout.addComponent(dragSource.get())
                 }
             }
-            add(draggableLabel)
         }
+
+
     }
 }

@@ -1,0 +1,8 @@
+@import "variables";
+
+//noinspection CssUnknownTarget
+@import "../material/material";
+
+@mixin mytheme{
+  @include material;
+}

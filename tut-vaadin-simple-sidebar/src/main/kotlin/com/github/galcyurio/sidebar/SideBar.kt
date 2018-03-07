@@ -1,7 +1,6 @@
 package com.github.galcyurio.sidebar
 
 import com.vaadin.icons.VaadinIcons
-import com.vaadin.server.Responsive
 import com.vaadin.shared.ui.ContentMode
 import com.vaadin.ui.*
 import com.vaadin.ui.themes.ValoTheme
@@ -47,10 +46,10 @@ class SideBar(
     private var title: String = ""
 ) : CssLayout() {
     private val menuItems: MenuItems = MenuItems()
+    lateinit var badgeMenuItem: Button
 
     init {
         primaryStyleName = ValoTheme.MENU_ROOT
-
 
         /* MenuPart */
         MenuPart().apply {
@@ -96,10 +95,23 @@ class SideBar(
 
                     /* About */
                     Button("About", VaadinIcons.ALT)
-                        .apply { primaryStyleName = ValoTheme.MENU_ITEM }
+                        .apply { primaryStyleName = ValoTheme.MENU_ITEM },
+
+                    Button()
+                        .also { badgeMenuItem = it }
+                        .apply {
+                            primaryStyleName = ValoTheme.MENU_ITEM
+                            icon = VaadinIcons.VAADIN_H
+                            isCaptionAsHtml = true
+                            setBadge("Badge Test")
+                        }
                 )
             )
         }.let { addComponent(it) }
+    }
+
+    fun setBadge(text: String) {
+        badgeMenuItem.caption = """Item Caption <span class="${ValoTheme.MENU_BADGE}">$text</span>"""
     }
 
     fun select(index: Int): Component {
